@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from '../../atoms/Button';
+import NavBar from '../../molecules/NavBar';
 
 const Login = () => { 
     const [username, setUsername] = useState ("");
@@ -14,8 +16,9 @@ const Login = () => {
 
 
     return (
-        //JSX
+
         <div className="container mt-5">
+            <NavBar/>
             <h3 className="mb-4">Login</h3>
             <p className="form-label">Username</p>
             <input
@@ -34,10 +37,8 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 />
-            <br/>
-            <button type="button" onClick={handleSubmit} className="btn btn-primary">
-                Sign In
-            </button>
+            <br/> 
+            <Button saveData={handleSubmit} label="Login"/>           
         </div>
     );
 };

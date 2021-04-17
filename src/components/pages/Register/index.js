@@ -1,43 +1,43 @@
 import React, { useState } from "react";
-
+import Button from '../../atoms/Button';
+import Axios from 'axios';
+import NavBar from '../../molecules/NavBar';
 const Login = () => { 
-    const [fullName, setFullName] = useState ("");
-    const [username, setUserName] = useState ("");
-    const [phoneNumber, setPhoneNumber] = useState ("");
+    const [first_name, setFirstName] = useState ("");
+    const [last_name, setLastName] = useState ("");
     const [email, setEmail] = useState ("");
-    const [address, setAddress] = useState ("");
+   
     
     const handleSubmit = () => {
         const data = {
-            fullName: fullName,
-            email: email,
-            username: username,
-            phoneNumber: phoneNumber,
-            address: address,            
+            first_name: first_name,
+            last_name: last_name,
+            email: email,   
+            avatar: 'https://source.unsplash.com/user/erondu',       
         };
-        console.log(data);
+        Axios.post('http://localhost:3004/users', data);
     };
 
 
     return (
-        //JSX
-        <div className="container mt-5">
+        <div className="container">
+            <NavBar/>
             <h3 className="mb-4">Register</h3>
-            <p className="form-label">Full Name</p>
+            <p className="form-label">First Name</p>
             <input
                 className="form-control"
-                placeholder="Input your full name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Input your first name"
+                value={first_name}
+                onChange={(e) => setFirstName(e.target.value)}
 
             />
             <br/>
-            <p className="form-label">Username</p>
+            <p className="form-label">Last Name</p>
             <input
                 className="form-control" 
                 placeholder="Input your username" 
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
+                value={last_name}
+                onChange={(e) => setLastName(e.target.value)}
                 />
             <br/>
 
@@ -49,25 +49,8 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 
             />
-            <br/>
-            <p className="form-label">Phone Number</p>
-            <input
-                className="form-control" 
-                placeholder="Input phone number" 
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)} 
-            />
-            <br/>
-            <p className="form-label">Address</p>
-            <input
-                className="form-control" 
-                placeholder="Input address"  
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-            />
-            <button type="button" onClick={handleSubmit} className="btn btn-primary mt-4">
-                Register
-            </button>
+             <br/>
+            <Button saveData={handleSubmit} label="Register"/>
         </div>
     );
 };
